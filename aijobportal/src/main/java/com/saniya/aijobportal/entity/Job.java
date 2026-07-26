@@ -25,6 +25,8 @@ public class Job {
 
     private String requiredSkills;
 
+    private String postedBy;
+
     private LocalDateTime createdAt;
 
     public Job() {
@@ -89,6 +91,14 @@ public class Job {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+    public String getPostedBy() {
+    return postedBy;
+}
+
+public void setPostedBy(String postedBy) {
+    this.postedBy = postedBy;
+}
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;

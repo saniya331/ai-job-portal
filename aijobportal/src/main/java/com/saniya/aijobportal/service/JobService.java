@@ -52,4 +52,22 @@ public Job updateJob(Long id, Job updatedJob) {
 public void deleteJob(Long id) {
     jobRepository.deleteById(id);
 }
+// Search by Company
+public List<Job> getJobsByCompany(String company) {
+    return jobRepository.findByCompany(company);
+}
+
+// Search by Location
+public List<Job> getJobsByLocation(String location) {
+    return jobRepository.findByLocation(location);
+}
+
+// Search by Skill
+public List<Job> getJobsBySkill(String skill) {
+    return jobRepository.findByRequiredSkillsContaining(skill);
+}
+// Get Jobs Posted By Employer
+public List<Job> getJobsByEmployer(String email) {
+    return jobRepository.findByPostedBy(email);
+}
 }

@@ -54,12 +54,12 @@ public void deleteJob(Long id) {
 }
 // Search by Company
 public List<Job> getJobsByCompany(String company) {
-    return jobRepository.findByCompany(company);
+    return jobRepository.findByCompanyContainingIgnoreCase(company);
 }
 
 // Search by Location
 public List<Job> getJobsByLocation(String location) {
-    return jobRepository.findByLocation(location);
+    return jobRepository.findByLocationContainingIgnoreCase(location);
 }
 
 // Search by Skill

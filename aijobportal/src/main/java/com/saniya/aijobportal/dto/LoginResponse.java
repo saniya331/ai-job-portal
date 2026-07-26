@@ -6,6 +6,7 @@ public class LoginResponse {
     private String fullName;
     private String email;
     private String role;
+    private String token;   // NEW FIELD
 
     public LoginResponse() {
     }
@@ -40,5 +41,15 @@ public class LoginResponse {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    // NEW Getter
+    public String getToken() {
+        return token;
+    }
+
+    // NEW Setter
+    public void setToken(String token) {
+        this.token = token;
     }
 }

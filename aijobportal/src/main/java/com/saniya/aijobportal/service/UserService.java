@@ -15,6 +15,7 @@ import com.saniya.aijobportal.entity.User;
 import com.saniya.aijobportal.exception.EmailAlreadyExistsException;
 import com.saniya.aijobportal.exception.InvalidCredentialsException;
 import com.saniya.aijobportal.repository.UserRepository;
+import com.saniya.aijobportal.security.JwtUtil;
 
 @Service
 public class UserService {
@@ -24,6 +25,9 @@ public class UserService {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     // Register User
     public RegisterResponse registerUser(RegisterRequest request) {
@@ -72,12 +76,16 @@ public class UserService {
             throw new InvalidCredentialsException("Invalid email or password");
         }
 
+        // Generate JWT Token
+        String token = jwtUtil.generateToken(user.getEmail());
+
         // Prepare response
         LoginResponse response = new LoginResponse();
         response.setMessage("Login Successful");
         response.setFullName(user.getFullName());
         response.setEmail(user.getEmail());
         response.setRole(user.getRole());
+        response.setToken(token);
 
         return response;
     }

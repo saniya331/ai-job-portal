@@ -28,13 +28,24 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
+        // Debug
+        System.out.println("=================================");
+        System.out.println("Request URI: " + request.getRequestURI());
+        System.out.println("Authorization Header: " + authHeader);
+
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
 
             String token = authHeader.substring(7);
 
-            if (jwtUtil.validateToken(token)) {
+            System.out.println("Token: " + token);
+
+            boolean isValid = jwtUtil.validateToken(token);
+            System.out.println("Token Valid: " + isValid);
+
+            if (isValid) {
 
                 String email = jwtUtil.extractUsername(token);
+                System.out.println("Authenticated User: " + email);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
@@ -47,8 +58,17 @@ public class JwtFilter extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
+                System.out.println("Authentication added to SecurityContext");
+            } else {
+                System.out.println("Invalid JWT Token");
             }
+
+        } else {
+            System.out.println("Authorization header missing or invalid");
         }
+
+        System.out.println("=================================");
 
         filterChain.doFilter(request, response);
     }

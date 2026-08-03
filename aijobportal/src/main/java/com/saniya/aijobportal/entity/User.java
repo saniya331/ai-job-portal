@@ -20,10 +20,20 @@ public class User {
 
     private String role;
 
+    @Column(length = 1000)
+    private String skills;
+
+    @Column(length = 500)
+    private String resume;
+
     private LocalDateTime createdAt;
 
     public User() {
     }
+
+    // ======================
+    // Getters and Setters
+    // ======================
 
     public Long getId() {
         return id;
@@ -63,6 +73,22 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public void setSkills(String skills) {
+        this.skills = skills;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
     }
 
     public LocalDateTime getCreatedAt() {

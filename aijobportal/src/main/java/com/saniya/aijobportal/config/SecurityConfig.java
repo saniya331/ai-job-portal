@@ -36,9 +36,14 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
+                        // Public APIs
                         .requestMatchers("/api/auth/**").permitAll()
 
+                        // Protected APIs
                         .requestMatchers("/api/jobs/**").authenticated()
+                        .requestMatchers("/api/applications/**").authenticated()
+                        .requestMatchers("/api/employer/**").authenticated()
+                        .requestMatchers("/api/profile/**").authenticated()
 
                         .anyRequest().authenticated())
 

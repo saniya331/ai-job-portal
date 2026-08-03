@@ -15,4 +15,6 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     List<Job> findByRequiredSkillsContaining(String skill);
 
     List<Job> findByPostedBy(String postedBy);
+
+    long countByPostedBy(String postedBy);
 }

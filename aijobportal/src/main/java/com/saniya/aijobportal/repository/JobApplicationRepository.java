@@ -12,4 +12,6 @@ public interface JobApplicationRepository
     List<JobApplication> findByStudentEmail(String studentEmail);
 
     List<JobApplication> findByJobId(Long jobId);
+
+    long count();
 }

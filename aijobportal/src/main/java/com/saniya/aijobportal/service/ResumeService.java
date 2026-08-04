@@ -2,6 +2,9 @@ package com.saniya.aijobportal.service;
 
 import com.saniya.aijobportal.entity.User;
 import com.saniya.aijobportal.repository.UserRepository;
+import com.saniya.aijobportal.service.ai.GeminiService;
+import com.saniya.aijobportal.util.PdfReaderUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +19,10 @@ public class ResumeService {
     @Autowired
     private UserRepository userRepository;
 
-    // Save files inside your project folder
+    @Autowired
+    private GeminiService geminiService;
+
+    // Save uploaded resumes inside the project folder
     private static final String UPLOAD_DIR =
             System.getProperty("user.dir") + File.separator + "uploads";
 
@@ -32,19 +38,41 @@ public class ResumeService {
         // Create unique filename
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
-        // Full destination path
+        // Destination file
         File destination = new File(uploadFolder, fileName);
 
-        // Save file
+        // Save uploaded file
         file.transferTo(destination);
+
+        // Read resume text using PDFBox
+        String resumeText = PdfReaderUtil.extractText(destination.getAbsolutePath());
+
+        System.out.println("========== Resume Text ==========");
+        System.out.println(resumeText);
+        System.out.println("=================================");
+
+        // Extract skills using Gemini AI
+        String extractedSkills = geminiService.extractSkills(resumeText);
+
+        System.out.println("========== Extracted Skills ==========");
+        System.out.println(extractedSkills);
+        System.out.println("======================================");
 
         // Update database
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
         if (optionalUser.isPresent()) {
+
             User user = optionalUser.get();
-            user.setResume(destination.getAbsolutePath());   // save full path
+
+            // Save resume path
+            user.setResume(destination.getAbsolutePath());
+
+            // Save extracted skills
+            user.setSkills(extractedSkills);
+
             userRepository.save(user);
+
         } else {
             throw new RuntimeException("User not found");
         }

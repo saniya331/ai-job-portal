@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+# Ignore uploaded resumes
+uploads/
+
+# Ignore application properties (contains API keys)
+aijobportal/src/main/resources/application.properties

@@ -5,6 +5,7 @@ import com.saniya.aijobportal.entity.Job;
 import com.saniya.aijobportal.entity.User;
 import com.saniya.aijobportal.repository.JobRepository;
 import com.saniya.aijobportal.repository.UserRepository;
+import com.saniya.aijobportal.service.ai.JobMatchExplanationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class JobMatchingService {
 
     @Autowired
     private JobRepository jobRepository;
+
+    @Autowired
+    private JobMatchExplanationService explanationService;
 
     public List<JobMatchDTO> getMatchingJobs(String email) {
 
@@ -53,6 +57,16 @@ public class JobMatchingService {
             dto.setJobTitle(job.getTitle());
             dto.setLocation(job.getLocation());
             dto.setMatchPercentage(match);
+
+            // Generate AI explanation
+            String reason = explanationService.generateExplanation(
+                    studentSkills,
+                    job.getTitle(),
+                    job.getCompany(),
+                    job.getRequiredSkills()
+            );
+
+            dto.setReason(reason);
 
             matchedJobs.add(dto);
         }

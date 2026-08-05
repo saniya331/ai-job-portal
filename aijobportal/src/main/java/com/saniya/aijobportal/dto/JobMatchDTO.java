@@ -7,6 +7,7 @@ public class JobMatchDTO {
     private String jobTitle;
     private String location;
     private int matchPercentage;
+    private String reason;
 
     public JobMatchDTO() {
     }
@@ -49,5 +50,13 @@ public class JobMatchDTO {
 
     public void setMatchPercentage(int matchPercentage) {
         this.matchPercentage = matchPercentage;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

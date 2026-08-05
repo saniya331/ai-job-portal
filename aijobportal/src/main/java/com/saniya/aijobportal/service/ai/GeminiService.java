@@ -10,15 +10,7 @@ public class GeminiService {
     @Value("${gemini.api.key}")
     private String apiKey;
 
-    public String extractSkills(String resumeText) {
-
-        String prompt = """
-                Extract only technical skills from the following resume.
-
-                Return only a comma-separated list.
-
-                Resume:
-                """ + resumeText;
+    public String askGemini(String prompt) {
 
         Client client = Client.builder()
                 .apiKey(apiKey)
@@ -29,5 +21,18 @@ public class GeminiService {
                 prompt,
                 null
         ).text();
+    }
+
+    public String extractSkills(String resumeText) {
+
+        String prompt = """
+                Extract only technical skills from the following resume.
+
+                Return only a comma-separated list.
+
+                Resume:
+                """ + resumeText;
+
+        return askGemini(prompt);
     }
 }

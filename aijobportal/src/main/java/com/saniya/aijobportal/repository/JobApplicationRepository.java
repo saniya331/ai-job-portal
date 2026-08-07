@@ -1,6 +1,7 @@
 package com.saniya.aijobportal.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,6 +13,11 @@ public interface JobApplicationRepository
     List<JobApplication> findByStudentEmail(String studentEmail);
 
     List<JobApplication> findByJobId(Long jobId);
+
+    Optional<JobApplication> findByJobIdAndStudentEmail(
+            Long jobId,
+            String studentEmail
+    );
 
     long count();
 }

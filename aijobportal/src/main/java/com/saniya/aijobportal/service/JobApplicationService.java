@@ -18,19 +18,41 @@ public class JobApplicationService {
     // Apply for Job
     public JobApplication apply(JobApplication application) {
 
-        application.setAppliedAt(LocalDateTime.now());
+        // Check duplicate application
+        if (jobApplicationRepository
+                .findByJobIdAndStudentEmail(
+                        application.getJobId(),
+                        application.getStudentEmail()
+                )
+                .isPresent()) {
+
+            throw new RuntimeException(
+                    "You have already applied for this job"
+            );
+        }
+
+        // Set default status
         application.setStatus("APPLIED");
+
+        // Set application time
+        application.setAppliedAt(LocalDateTime.now());
 
         return jobApplicationRepository.save(application);
     }
 
-    // Student's Applications
-    public List<JobApplication> getApplicationsByStudent(String email) {
-        return jobApplicationRepository.findByStudentEmail(email);
+    // Get applications submitted by student
+    public List<JobApplication> getApplicationsByStudent(
+            String email) {
+
+        return jobApplicationRepository
+                .findByStudentEmail(email);
     }
 
-    // Applications for a Job
-    public List<JobApplication> getApplicationsByJob(Long jobId) {
-        return jobApplicationRepository.findByJobId(jobId);
+    // Get applicants for a job
+    public List<JobApplication> getApplicationsByJob(
+            Long jobId) {
+
+        return jobApplicationRepository
+                .findByJobId(jobId);
     }
 }

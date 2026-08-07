@@ -40,6 +40,7 @@ public class JobApplicationService {
         return jobApplicationRepository.save(application);
     }
 
+
     // Get applications submitted by student
     public List<JobApplication> getApplicationsByStudent(
             String email) {
@@ -48,11 +49,31 @@ public class JobApplicationService {
                 .findByStudentEmail(email);
     }
 
+
     // Get applicants for a job
     public List<JobApplication> getApplicationsByJob(
             Long jobId) {
 
         return jobApplicationRepository
                 .findByJobId(jobId);
+    }
+
+
+    // Update application status
+    public JobApplication updateStatus(
+            Long applicationId,
+            String status) {
+
+        JobApplication application =
+                jobApplicationRepository.findById(applicationId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Application not found"
+                                )
+                        );
+
+        application.setStatus(status.toUpperCase());
+
+        return jobApplicationRepository.save(application);
     }
 }

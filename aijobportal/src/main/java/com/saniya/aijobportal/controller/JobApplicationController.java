@@ -15,21 +15,43 @@ public class JobApplicationController {
     @Autowired
     private JobApplicationService jobApplicationService;
 
+
     // Apply for Job
     @PostMapping
-    public JobApplication apply(@RequestBody JobApplication application) {
+    public JobApplication apply(
+            @RequestBody JobApplication application) {
+
         return jobApplicationService.apply(application);
     }
 
+
     // Student Applications
     @GetMapping("/student/{email}")
-    public List<JobApplication> studentApplications(@PathVariable String email) {
-        return jobApplicationService.getApplicationsByStudent(email);
+    public List<JobApplication> studentApplications(
+            @PathVariable String email) {
+
+        return jobApplicationService
+                .getApplicationsByStudent(email);
     }
+
 
     // Job Applicants
     @GetMapping("/job/{jobId}")
-    public List<JobApplication> jobApplications(@PathVariable Long jobId) {
-        return jobApplicationService.getApplicationsByJob(jobId);
+    public List<JobApplication> jobApplications(
+            @PathVariable Long jobId) {
+
+        return jobApplicationService
+                .getApplicationsByJob(jobId);
+    }
+
+
+    // Update Application Status
+    @PutMapping("/{applicationId}/status")
+    public JobApplication updateStatus(
+            @PathVariable Long applicationId,
+            @RequestParam String status) {
+
+        return jobApplicationService
+                .updateStatus(applicationId, status);
     }
 }

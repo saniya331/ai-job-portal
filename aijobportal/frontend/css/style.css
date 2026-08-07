@@ -1,15 +1,17 @@
+/* ================================
+   GLOBAL
+================================ */
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
     background: #f4f7fb;
-}
-
-.auth-container {
+    color: #222;
     min-height: 100vh;
 
     display: flex;
@@ -17,8 +19,14 @@ body {
     align-items: center;
 }
 
-.auth-card {
-    width: 400px;
+
+/* ================================
+   CONTAINER
+================================ */
+
+.container {
+    width: 100%;
+    max-width: 420px;
 
     background: white;
 
@@ -26,40 +34,73 @@ body {
 
     border-radius: 12px;
 
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
 
     text-align: center;
 }
 
-.auth-card h1 {
+
+/* ================================
+   HEADINGS
+================================ */
+
+.container h1 {
+    font-size: 28px;
     margin-bottom: 10px;
 }
 
-.auth-card h2 {
+.container h2 {
+    font-size: 22px;
     margin-bottom: 8px;
 }
 
-.subtitle {
-    color: #777;
-    margin-bottom: 25px;
+.container p {
+    margin-bottom: 20px;
+    color: #666;
 }
 
-.auth-card input,
-.auth-card select {
+
+/* ================================
+   FORM
+================================ */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* ================================
+   INPUTS
+================================ */
+
+input,
+select {
     width: 100%;
 
     padding: 12px;
-
-    margin-bottom: 15px;
 
     border: 1px solid #ccc;
 
     border-radius: 6px;
 
     font-size: 15px;
+
+    outline: none;
 }
 
-.auth-card button {
+input:focus,
+select:focus {
+    border-color: #2563eb;
+}
+
+
+/* ================================
+   BUTTON
+================================ */
+
+button {
     width: 100%;
 
     padding: 12px;
@@ -74,25 +115,63 @@ body {
 
     font-size: 16px;
 
+    font-weight: bold;
+
     cursor: pointer;
 }
 
-.auth-card button:hover {
-    opacity: 0.9;
+button:hover {
+    background: #1d4ed8;
 }
+
+
+/* ================================
+   MESSAGE
+================================ */
 
 #message {
-    margin-top: 15px;
+    margin-top: 18px;
 
-    font-size: 14px;
+    font-weight: bold;
+
+    color: #2563eb;
 }
 
-.switch-page {
-    margin-top: 20px;
 
-    font-size: 14px;
-}
+/* ================================
+   LINKS
+================================ */
 
-.switch-page a {
+a {
+    color: #2563eb;
+
     text-decoration: none;
+
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 500px) {
+
+    .container {
+        width: 90%;
+
+        padding: 25px;
+    }
+
+    .container h1 {
+        font-size: 24px;
+    }
+
+    .container h2 {
+        font-size: 20px;
+    }
 }

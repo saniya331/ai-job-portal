@@ -1,6 +1,6 @@
-// ========================================
+// ================================
 // REGISTER
-// ========================================
+// ================================
 
 const registerForm = document.getElementById("registerForm");
 
@@ -10,24 +10,14 @@ if (registerForm) {
 
         event.preventDefault();
 
-        const fullName =
-            document.getElementById("fullName").value.trim();
+        const fullName = document.getElementById("fullName").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const role = document.getElementById("role").value;
 
-        const email =
-            document.getElementById("email").value.trim();
-
-        const password =
-            document.getElementById("password").value;
-
-        const role =
-            document.getElementById("role").value;
-
-        const message =
-            document.getElementById("message");
+        const message = document.getElementById("message");
 
         try {
-
-            message.textContent = "Registering...";
 
             const data = await apiRequest(
                 "/api/auth/register",
@@ -40,10 +30,9 @@ if (registerForm) {
                 }
             );
 
-            console.log("Register Response:", data);
+            console.log("Registration Response:", data);
 
-            message.textContent =
-                "Registration successful! Redirecting to login...";
+            message.textContent = "Registration successful!";
 
             setTimeout(function () {
 
@@ -53,7 +42,7 @@ if (registerForm) {
 
         } catch (error) {
 
-            console.error("Registration Error:", error);
+            console.error(error);
 
             message.textContent =
                 "Registration failed: " + error.message;
@@ -62,9 +51,9 @@ if (registerForm) {
 }
 
 
-// ========================================
+// ================================
 // LOGIN
-// ========================================
+// ================================
 
 const loginForm = document.getElementById("loginForm");
 
@@ -74,18 +63,12 @@ if (loginForm) {
 
         event.preventDefault();
 
-        const email =
-            document.getElementById("email").value.trim();
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
-        const password =
-            document.getElementById("password").value;
-
-        const message =
-            document.getElementById("message");
+        const message = document.getElementById("message");
 
         try {
-
-            message.textContent = "Logging in...";
 
             const data = await apiRequest(
                 "/api/auth/login",
@@ -98,49 +81,48 @@ if (loginForm) {
 
             console.log("Login Response:", data);
 
-            // Save JWT token
-            localStorage.setItem(
-                "token",
-                data.token
-            );
+            // ================================
+            // SAVE LOGIN INFORMATION
+            // ================================
 
-            // Save email
-            localStorage.setItem(
-                "email",
-                email
-            );
+            localStorage.setItem("token", data.token);
 
-            // Save role if backend sends it
-            if (data.role) {
+            localStorage.setItem("email", data.email);
 
-                localStorage.setItem(
-                    "role",
-                    data.role
-                );
-            }
+            localStorage.setItem("fullName", data.fullName);
 
-            message.textContent =
-                "Login successful!";
+            localStorage.setItem("role", data.role);
 
-            // Redirect
+            message.textContent = "Login successful!";
+
+            // ================================
+            // REDIRECT BASED ON ROLE
+            // ================================
+
             setTimeout(function () {
 
-                if (data.role === "RECRUITER") {
+                if (data.role === "STUDENT") {
+
+                    window.location.href =
+                        "student-dashboard.html";
+
+                } else if (data.role === "RECRUITER") {
 
                     window.location.href =
                         "recruiter-dashboard.html";
 
                 } else {
 
-                    window.location.href =
-                        "student-dashboard.html";
+                    message.textContent =
+                        "Unknown user role.";
+
                 }
 
-            }, 500);
+            }, 1000);
 
         } catch (error) {
 
-            console.error("Login Error:", error);
+            console.error(error);
 
             message.textContent =
                 "Login failed: " + error.message;

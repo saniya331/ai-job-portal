@@ -21,6 +21,7 @@ async function apiRequest(endpoint, method = "GET", body = null) {
     const data = await response.json();
 
     if (!response.ok) {
+
         throw new Error(
             data.message || data || "Request failed"
         );

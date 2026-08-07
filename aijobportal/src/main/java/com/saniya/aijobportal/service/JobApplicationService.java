@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.saniya.aijobportal.entity.ApplicationStatus;
 import com.saniya.aijobportal.entity.JobApplication;
 import com.saniya.aijobportal.repository.JobApplicationRepository;
 
@@ -32,14 +33,15 @@ public class JobApplicationService {
         }
 
         // Set default status
-        application.setStatus("APPLIED");
+        application.setStatus(ApplicationStatus.APPLIED);
 
         // Set application time
-        application.setAppliedAt(LocalDateTime.now());
+        application.setAppliedAt(
+                LocalDateTime.now()
+        );
 
         return jobApplicationRepository.save(application);
     }
-
 
     // Get applications submitted by student
     public List<JobApplication> getApplicationsByStudent(
@@ -49,7 +51,6 @@ public class JobApplicationService {
                 .findByStudentEmail(email);
     }
 
-
     // Get applicants for a job
     public List<JobApplication> getApplicationsByJob(
             Long jobId) {
@@ -58,21 +59,20 @@ public class JobApplicationService {
                 .findByJobId(jobId);
     }
 
-
     // Update application status
     public JobApplication updateStatus(
             Long applicationId,
-            String status) {
+            ApplicationStatus status) {
 
         JobApplication application =
-                jobApplicationRepository.findById(applicationId)
+                jobApplicationRepository
+                        .findById(applicationId)
                         .orElseThrow(() ->
                                 new RuntimeException(
                                         "Application not found"
-                                )
-                        );
+                                ));
 
-        application.setStatus(status.toUpperCase());
+        application.setStatus(status);
 
         return jobApplicationRepository.save(application);
     }

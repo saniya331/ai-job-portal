@@ -391,3 +391,124 @@ a:hover {
         font-size: 24px;
     }
 }
+
+/* ================================
+   JOB SEARCH
+================================ */
+
+.job-search {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+.job-search input {
+    flex: 1;
+}
+
+.job-search button {
+    width: auto;
+
+    padding: 12px 25px;
+}
+
+
+/* ================================
+   JOB CONTAINER
+================================ */
+
+.jobs-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+
+/* ================================
+   JOB CARD
+================================ */
+
+.job-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.08);
+
+    transition: transform 0.2s;
+}
+
+.job-card:hover {
+    transform: translateY(-4px);
+}
+
+
+.job-card h2 {
+    margin-bottom: 15px;
+
+    color: #2563eb;
+}
+
+
+.job-card p {
+    margin-bottom: 10px;
+
+    color: #555;
+
+    line-height: 1.5;
+}
+
+
+/* ================================
+   APPLY BUTTON
+================================ */
+
+.job-card button {
+    margin-top: 15px;
+}
+
+
+/* ================================
+   NO JOBS
+================================ */
+
+.no-jobs {
+    background: white;
+
+    padding: 40px;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    grid-column: 1 / -1;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 700px) {
+
+    .jobs-container {
+        grid-template-columns: 1fr;
+    }
+
+    .job-search {
+        flex-direction: column;
+    }
+
+    .job-search button {
+        width: 100%;
+    }
+
+}

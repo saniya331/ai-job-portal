@@ -108,8 +108,21 @@ if (loginForm) {
 
                 } else if (data.role === "RECRUITER") {
 
-                    window.location.href =
-                        "recruiter-dashboard.html";
+                    if(data.role==="RECRUITER"){
+
+window.location.href =
+"recruiter-dashboard.html";
+
+}
+
+else{
+
+
+window.location.href =
+"student-dashboard.html";
+
+
+}
 
                 } else {
 

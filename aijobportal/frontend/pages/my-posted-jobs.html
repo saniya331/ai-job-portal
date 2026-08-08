@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Posted Jobs - AI Job Portal</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <nav class="navbar">
+
+        <div class="logo">
+            AI Job Portal
+        </div>
+
+        <div>
+
+            <button onclick="goRecruiterDashboard()">
+                Dashboard
+            </button>
+
+            <button onclick="postJobPage()">
+                Post Job
+            </button>
+
+            <button id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="dashboard-content">
+
+        <div class="welcome-section">
+
+            <h1>
+                My Posted Jobs 💼
+            </h1>
+
+            <p>
+                Manage the jobs you have posted.
+            </p>
+
+        </div>
+
+
+        <p id="message">
+            Loading jobs...
+        </p>
+
+
+        <div id="myJobsContainer"
+             class="jobs-container">
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="../js/recruiter.js?v=2"></script>
+
+</body>
+
+</html>

@@ -3,15 +3,15 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>Recruiter Dashboard</title>
+    <title>Recruiter Dashboard - AI Job Portal</title>
 
-<link rel="stylesheet"
-href="../css/style.css">
+    <link rel="stylesheet"
+          href="../css/style.css">
 
 </head>
 
@@ -22,54 +22,111 @@ href="../css/style.css">
 <div class="dashboard">
 
 
-<nav class="navbar">
+    <!-- ================================
+         NAVBAR
+         ================================ -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            AI Job Portal
+        </div>
 
 
-<div class="logo">
-AI Job Portal
-</div>
+        <div>
+
+            <button onclick="postJobPage()">
+                Post Job
+            </button>
 
 
-<div>
-
-<button onclick="postJobPage()">
-Post Job
-</button>
+            <button onclick="viewMyJobs()">
+                My Posted Jobs
+            </button>
 
 
-<button id="logoutBtn">
-Logout
-</button>
+            <button id="logoutBtn">
+                Logout
+            </button>
 
+        </div>
 
-</div>
-
-
-</nav>
-
-
-
-<main class="dashboard-content">
-
-
-<div class="welcome-section">
-
-
-<h1>
-Recruiter Dashboard 💼
-</h1>
-
-
-<p>
-Manage your job postings.
-</p>
-
-
-</div>
+    </nav>
 
 
 
-</main>
+    <!-- ================================
+         MAIN CONTENT
+         ================================ -->
+
+    <main class="dashboard-content">
+
+
+        <div class="welcome-section">
+
+            <h1>
+                Recruiter Dashboard 💼
+            </h1>
+
+
+            <p>
+                Manage your job postings.
+            </p>
+
+        </div>
+
+
+
+        <!-- ================================
+             DASHBOARD CARDS
+             ================================ -->
+
+        <div class="dashboard-card">
+
+            <h2>
+                Post a New Job 🚀
+            </h2>
+
+
+            <p>
+                Create a new job opportunity
+                for students.
+            </p>
+
+
+            <button onclick="postJobPage()">
+
+                Post New Job
+
+            </button>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <h2>
+                My Posted Jobs 📋
+            </h2>
+
+
+            <p>
+                View, edit, and delete
+                your job postings.
+            </p>
+
+
+            <button onclick="viewMyJobs()">
+
+                View My Jobs
+
+            </button>
+
+        </div>
+
+
+    </main>
 
 
 </div>
